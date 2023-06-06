@@ -7,5 +7,6 @@ target 'WeatherApp' do
 
   # Pods for WeatherApp
 pod 'SwiftSVG', '~> 2.0'
+pod 'RealmSwift', '~>10'
 
 end

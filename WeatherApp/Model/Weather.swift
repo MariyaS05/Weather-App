@@ -6,18 +6,19 @@
 //
 
 import Foundation
-struct Weather {
-    var name : String =  "Название"
-    var temperature : Int = 0
-    var conditionCode : String = ""
-    var url : String = ""
-    var condition : String = ""
-    var presure : Int = 0
-    var windSpeed : Double = 0
-    var tempMax : Int? = 0
-    var tempMin : Int? = 0
+import RealmSwift
+class Weather : Object{
+    @objc dynamic var name : String =  "Название"
+    @objc dynamic var temperature : Int = 0
+    @objc dynamic var conditionCode : String = ""
+    @objc dynamic var url : String = ""
+    @objc dynamic var condition : String = ""
+    @objc dynamic var presure : Int = 0
+    @objc dynamic var windSpeed : Double = 0
+    @objc dynamic var tempMax : Int = 0
+    @objc dynamic var tempMin : Int = 0
     
-    var conditionSrting : String {
+    @objc dynamic var conditionSrting : String {
         switch condition {
         case "clear" : return "Ясно"
         case "partly-cloudy": return "Малооблачно"
@@ -48,10 +49,10 @@ struct Weather {
         condition =  weatherData.fact.condition
         presure =  weatherData.fact.pressureMm
         windSpeed = weatherData.fact.windSpeed
-        tempMax =  weatherData.forecast.parts.first?.tempMax
-        tempMin =  weatherData.forecast.parts.first?.tempMin
+        tempMax =  weatherData.forecast.parts.first!.tempMax
+        tempMin =  weatherData.forecast.parts.first!.tempMin
     }
-    init(){
+    override init(){
     }
 }
 

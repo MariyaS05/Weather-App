@@ -15,13 +15,15 @@ extension UIViewController {
             tf.placeholder = placeholder
         }
         let alertOk = UIAlertAction(title: "Добавить", style: .default) { alert in
-            guard ((alertVC.textFields?.first?.hasText) == nil) else {
+            guard let textField =  alertVC.textFields?.first else {return}
+            guard textField.hasText else {
                 return
             }
-            guard let textField = alertVC.textFields?.first?.text else {
+            guard let textFieldText = alertVC.textFields?.first?.text else {
                 return
             }
-            complitionHandler(textField)
+            complitionHandler(textFieldText)
+            
         }
         let alertCancel =  UIAlertAction(title: "Отмена", style: .cancel)
         alertVC.addAction(alertOk)
@@ -29,3 +31,4 @@ extension UIViewController {
         present(alertVC, animated: true)
     }
 }
+
