@@ -29,7 +29,7 @@
 /* Begin PBXFileReference section */
 		4C0339CB2A38E34700A081FD /* Ext+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+String.swift"; sourceTree = "<group>"; };
 		4C0339CD2A38E43B00A081FD /* LocalCityWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCityWeatherViewController.swift; sourceTree = "<group>"; };
-		4C1C5D112A27AE9C00EE4BA0 /* Ext+ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+ViewController.swift"; sourceTree = "<group>"; };
+		4C1C5D112A27AE9C00EE4BA0 /* Ext+ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Ext+ViewController.swift"; path = "../Model/Ext+ViewController.swift"; sourceTree = "<group>"; };
 		4C3633C529F7CF97001B8C60 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C3633C829F7CF97001B8C60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C3633CA29F7CF97001B8C60 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,8 +98,6 @@
 				4C3633E529F7ECFF001B8C60 /* WeatherData.swift */,
 				4C3633E729F7F038001B8C60 /* Weather.swift */,
 				4C3633E929F9503E001B8C60 /* GetCitiesWeather.swift */,
-				4C1C5D112A27AE9C00EE4BA0 /* Ext+ViewController.swift */,
-				4C0339CB2A38E34700A081FD /* Ext+String.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -124,6 +122,8 @@
 				4C3633CA29F7CF97001B8C60 /* SceneDelegate.swift */,
 				4C3633D129F7CF98001B8C60 /* Assets.xcassets */,
 				4C3633E129F7E5C3001B8C60 /* Constant.swift */,
+				4C1C5D112A27AE9C00EE4BA0 /* Ext+ViewController.swift */,
+				4C0339CB2A38E34700A081FD /* Ext+String.swift */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";

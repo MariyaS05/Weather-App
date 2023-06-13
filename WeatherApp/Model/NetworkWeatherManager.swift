@@ -12,7 +12,7 @@ class NetworkWeatherManager {
         let urlString = "https://api.weather.yandex.ru/v2/informers?lat=\(latitude)&lon=\(longitude)"
         guard let url = URL(string: urlString) else {return}
         var request =  URLRequest(url: url,timeoutInterval: Double.infinity)
-        request.addValue("\(Constant.apiKey)", forHTTPHeaderField: "X-Yandex-API-Key")
+        request.addValue("\(Constant.apiKey)", forHTTPHeaderField: Constant.header)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
 

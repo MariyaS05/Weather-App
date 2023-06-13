@@ -8,5 +8,6 @@
 import Foundation
 enum Constant {
    static let apiKey = "0bb3508c-ef87-4e7d-974e-907f9a476e4e"
+    static let header = "X-Yandex-API-Key"
 }
 
