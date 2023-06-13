@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 extension UIViewController {
     func presentAlert(name:String,placeholder: String,complitionHandler: @escaping(String)->Void){
@@ -29,5 +30,10 @@ extension UIViewController {
         alertVC.addAction(alertOk)
         alertVC.addAction(alertCancel)
         present(alertVC, animated: true)
+    }
+}
+extension CLLocation {
+    func fetchCity(completion: @escaping (_ city: String?, _ error: Error?) -> ()) {
+        CLGeocoder().reverseGeocodeLocation(self) { completion($0?.first?.locality,$1) }
     }
 }
