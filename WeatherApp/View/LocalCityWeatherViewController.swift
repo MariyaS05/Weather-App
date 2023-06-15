@@ -24,6 +24,7 @@ class LocalCityWeatherViewController: UIViewController {
         super.viewDidLoad()
         locationManager = CLLocationManager()
         locationManager?.delegate =  self
+        locationManager?.requestLocation()
         locationManager?.requestAlwaysAuthorization()
     }
     private func uptade(with weather: Weather){
@@ -33,22 +34,24 @@ class LocalCityWeatherViewController: UIViewController {
         windSpeedLabel.text =  String(weather.windSpeed)
         minTempLabel.text =  String(weather.tempMin)
         maxTempLabel.text =  String(weather.tempMax)
+        view.backgroundColor = UIColor(patternImage: (UIImage(named: weather.background)!))
         guard let url = URL(string: "https://yastatic.net/weather/i/icons/funky/dark/\(weather.conditionCode).svg") else {return}
         let view =  UIView(SVGURL: url) { image in
             image.resizeToFit(self.viewCityWeather.bounds)
         }
-        
         self.viewCityWeather.addSubview(view)
     }
 }
 //MARK: - CLLOcationManagerDelegate
 extension LocalCityWeatherViewController : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
+        guard let location = locations.last else { return
+        }
         locationManager?.stopUpdatingLocation()
         let lat = location.coordinate.latitude
         let lon = location.coordinate.longitude
         NetworkWeatherManager.shared.fetchWeather(latitude: lat, longitude: lon) { weather in
+            print(weather)
             DispatchQueue.main.async {
                 self.uptade(with: weather)
             }

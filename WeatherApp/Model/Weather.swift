@@ -42,6 +42,15 @@ class Weather : Object{
         default : return "Загрузка..."
         }
     }
+    var background : String {
+        switch condition {
+        case "clear" : return "sunny"
+        case "partly-cloudy","cloudy" : return "partly-cloudy"
+            
+        default:
+            return "overcast"
+        }
+    }
     init(weatherData : WeatherData) {
         temperature = weatherData.fact.temp
         conditionCode =  weatherData.fact.icon

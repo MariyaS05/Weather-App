@@ -15,7 +15,6 @@ class ListTVC: UITableViewController {
     var filterCityArray = [Weather]()
     var namesCitiesArray : [String] = []
     let newWeather = Weather()
-    
     let searchController = UISearchController(searchResultsController: nil)
     var searchBarIsEmpty : Bool {
         guard let text =  searchController.searchBar.text else {
@@ -30,10 +29,6 @@ class ListTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         citiesArray = realm.objects(Weather.self).map({$0})
-//        realm.beginWrite()
-//        realm.deleteAll()
-//        try! realm.commitWrite()
-        
         if self.citiesArray.isEmpty {
             namesCitiesArray = ["Минск","Брест","Гродно","Витебск","Гомель","Речица"]
             self.citiesArray =  Array(repeating: newWeather, count: namesCitiesArray.count)
