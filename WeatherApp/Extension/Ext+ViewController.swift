@@ -31,6 +31,14 @@ extension UIViewController {
         alertVC.addAction(alertCancel)
         present(alertVC, animated: true)
     }
+    func presentCustomAlert(with title : String, message : String, buttonTitle: String){
+        let alertVC =  CustomAlertViewController(alertTitle: title, message: message, buttonTitle: buttonTitle)
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        DispatchQueue.main.async { [weak self] in
+            self?.present(alertVC, animated: true, completion: nil)
+        }
+    }
 }
 extension CLLocation {
     func fetchCity(completion: @escaping (_ city: String?, _ error: Error?) -> ()) {

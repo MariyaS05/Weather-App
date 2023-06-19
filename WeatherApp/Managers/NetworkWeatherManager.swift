@@ -15,12 +15,11 @@ class NetworkWeatherManager {
         request.addValue("\(Constant.apiKey)", forHTTPHeaderField: Constant.header)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-
             guard let data = data else {
                 print(String(describing: error))
                 return
             }
-            print(String(data: data, encoding: .utf8)!)
+//            print(String(data: data, encoding: .utf8)!)
             
             if let weather  =  self.parseJSON(with: data) {
                completionHandler(weather)
