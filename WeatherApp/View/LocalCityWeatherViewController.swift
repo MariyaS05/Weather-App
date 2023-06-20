@@ -41,6 +41,17 @@ class LocalCityWeatherViewController: UIViewController {
         }
         self.viewCityWeather.addSubview(view)
     }
+    private func clearUI(){
+        conditionLabel.text = "Неизвестно"
+        tempCityLabel.text =  "?"
+        preasureLabel.text = "?"
+        windSpeedLabel.text = "?"
+        minTempLabel.text = "?"
+        maxTempLabel.text = "?"
+        let view =  UIImageView(image: UIImage(systemName: "questionmark"))
+        view.frame = viewCityWeather.frame
+        viewCityWeather.addSubview(view)
+    }
 }
 //MARK: - CLLOcationManagerDelegate
 extension LocalCityWeatherViewController : CLLocationManagerDelegate {
@@ -50,13 +61,19 @@ extension LocalCityWeatherViewController : CLLocationManagerDelegate {
         locationManager?.stopUpdatingLocation()
         let lat = location.coordinate.latitude
         let lon = location.coordinate.longitude
-        NetworkWeatherManager.shared.fetchWeather(latitude: lat, longitude: lon) { weather in
-            print(weather)
+        NetworkWeatherManager.shared.fetchWeather(latitude: lat, longitude: lon) { weather,error  in
+            
+            guard let weather =  weather  else {
+                DispatchQueue.main.async {
+                    self.clearUI()
+                    self.presentCustomAlert(with: "Что-то пошло не так", message: "Проверьте соединение с интернетом", buttonTitle: "ОК")
+                }
+                return
+            }
             DispatchQueue.main.async {
                 self.uptade(with: weather)
             }
         }
-        print("didUpdateLocations: \(lat) : \(lon)")
         location.fetchCity { city, error in
             self.cityNameLabel.text =  city
         }

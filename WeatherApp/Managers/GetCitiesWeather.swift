@@ -10,16 +10,19 @@ import CoreLocation
  
 
 enum GetCitiesWeather {
-     static func getCityWeather(cities:[String],complition :@escaping(Int,Weather)->Void){
+     static func getCityWeather(cities:[String],complitionHandler :@escaping(Int,Weather?)->()){
         for (index,item) in cities.enumerated() {
             getCoordinateFrom(city: item) { result in
                 switch result {
                 case .success(let coordinate):
-                    NetworkWeatherManager.shared.fetchWeather(latitude: coordinate.latitude, longitude: coordinate.longitude) { weather in
-                        complition(index,weather)
+                    NetworkWeatherManager.shared.fetchWeather(latitude: coordinate.latitude, longitude: coordinate.longitude) { weather,error  in
+                        guard let weather = weather,error == nil  else {
+                            return
+                        }
+                            complitionHandler(index, weather)
                     }
-                    case .failure(let failure ):
-                    print(failure)
+                case .failure:
+                    complitionHandler(index,nil)
                 }
             }
         }

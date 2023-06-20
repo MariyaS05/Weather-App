@@ -42,8 +42,6 @@ class ListTVC: UITableViewController {
             guard let self =  self  else {
                 return
             }
-            //            realm.beginWrite()
-            //            realm.add(newWeather)
             GetCitiesWeather.getCoordinateFrom(city: city) { result in
                 switch result {
                 case .success :
@@ -66,14 +64,23 @@ class ListTVC: UITableViewController {
         navigationItem.hidesSearchBarWhenScrolling =  false
     }
     
-    private func addCities(){GetCitiesWeather.getCityWeather(cities: self.namesCitiesArray) {[weak self] index, weather in
-        guard let self = self else {return}
-        self.citiesArray[index] =  weather
-        self.citiesArray[index].name = self.namesCitiesArray[index]
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+    private func addCities(){
+        GetCitiesWeather.getCityWeather(cities: self.namesCitiesArray) {[weak self] index, weather in
+            guard let self = self else {
+                return
+            }
+            guard let weather = weather else {
+                DispatchQueue.main.async {
+                    self.presentCustomAlert(with: "Что-то пошло не так.", message: "Проверьте соединение с интернетом", buttonTitle: "ОК")
+                }
+                return
+            }
+            self.citiesArray[index] =  weather
+            self.citiesArray[index].name = self.namesCitiesArray[index]
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
-    }
     }
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
